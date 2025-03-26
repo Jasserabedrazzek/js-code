@@ -16,8 +16,13 @@ class CreateElement {
 
 
             if (this.options.children) {
-                element.textContent = this.options.children;
+                if (typeof this.options.children === "string") {
+                    element.textContent = this.options.children;
+                } else if (this.options.children instanceof HTMLElement) {
+                    element.appendChild(this.options.children);
+                }
             }
+            
 
             return element;
         } catch (error) {
@@ -63,7 +68,6 @@ class AddElementInDOM {
 
             const parentElement = document.querySelector(this.options.parent);
             if (!parentElement) throw new Error(`Parent selector "${this.options.parent}" not found`);
-
             parentElement.appendChild(this.options.element);
         } catch (error) {
             console.error(error);
