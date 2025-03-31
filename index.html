@@ -142,16 +142,17 @@
             <code>
                 const newDiv = createElement({
                     tag: 'div',
-                    children: 'Hello, World!'
+                    children: 'Hello, World!' // The text content inside the div
                 });
 
                 appendToDOM({
-                    element: newDiv,
-                    parent: 'body'
+                    element: newDiv, // The created div element
+                    parent: 'body' // Append it to the body of the page
                 });
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+        <p><strong>Output:</strong> A simple `div` will appear with the text "Hello, World!" on the webpage.</p>
 
         <h3>2. Adding Attributes</h3>
         <p>This example adds attributes like <code>id</code> and <code>class</code> to the element.</p>
@@ -159,13 +160,13 @@
             <code>
                 const newDiv = createElement({
                     tag: 'div',
-                    attributes: { id: 'myDiv', class: 'container' },
-                    children: 'This is a styled div!'
+                    attributes: { id: 'myDiv', class: 'container' }, // Adding id and class
+                    children: 'This is a styled div!' // The content inside the div
                 });
 
                 applyStyles({
-                    selector: '#myDiv',
-                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' }
+                    selector: '#myDiv', // Target the div with id 'myDiv'
+                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' } // Applying styles
                 });
 
                 appendToDOM({
@@ -175,6 +176,7 @@
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+        <p><strong>Output:</strong> A `div` with an ID of `myDiv` will be displayed with a light blue background, dark blue text, and padding. The text inside it will read "This is a styled div!"</p>
 
         <h3>3. Nesting Elements</h3>
         <p>This example creates a <code>div</code> containing a <code>span</code> element.</p>
@@ -184,13 +186,13 @@
                     tag: 'div',
                     attributes: { id: 'parent' },
                     children: createElement({
-                        tag: 'span',
-                        children: 'This is a nested span element'
+                        tag: 'span', // Nested span inside div
+                        children: 'This is a nested span element' // Text content inside span
                     })
                 });
 
                 applyStyles({
-                    selector: '#parent',
+                    selector: '#parent', // Apply styles to the parent div
                     css: { backgroundColor: 'lightgreen', padding: '20px' }
                 });
 
@@ -201,6 +203,7 @@
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+        <p><strong>Output:</strong> A `div` with the text "This is a nested span element" inside a nested `span` element will appear. The `div` will have a light green background and padding.</p>
 
         <h3>4. Dynamic Attributes and Events</h3>
         <p>This example shows how to dynamically add attributes and event listeners to elements.</p>
@@ -209,11 +212,11 @@
                 const button = createElement({
                     tag: 'button',
                     attributes: { id: 'myButton' },
-                    children: 'Click Me'
+                    children: 'Click Me' // Button text
                 });
 
                 button.addEventListener('click', () => {
-                    alert('Button clicked!');
+                    alert('Button clicked!'); // Alert on button click
                 });
 
                 appendToDOM({
@@ -223,42 +226,74 @@
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+        <p><strong>Output:</strong> A button labeled "Click Me" will appear. When clicked, it will show an alert that says "Button clicked!"</p>
 
         <h3>5. Applying Styles</h3>
         <p>Example of applying CSS styles to a specific selector.</p>
         <div class="code-block">
             <code>
                 applyStyles({
-                    selector: '#myDiv',
+                    selector: '#myDiv', // Targeting div with id myDiv
                     css: {
                         backgroundColor: 'yellow',
                         fontSize: '20px',
-                        textAlign: 'center'
+                        textAlign: 'center' // Apply styles like background color and text alignment
                     }
                 });
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+        <p><strong>Output:</strong> The div with the ID `myDiv` will have a yellow background, font size set to 20px, and its text will be centered.</p>
+
+        <h3>6. Creating a Table</h3>
+        <p>This example demonstrates how to create a simple HTML table with rows and cells.</p>
+        <div class="code-block">
+            <code>
+                const table = createElement({
+                    tag: 'table',
+                    children: [
+                        createElement({ tag: 'tr', children: [
+                            createElement({ tag: 'th', children: 'Header 1' }),
+                            createElement({ tag: 'th', children: 'Header 2' })
+                        ]}),
+                        createElement({ tag: 'tr', children: [
+                            createElement({ tag: 'td', children: 'Row 1, Cell 1' }),
+                            createElement({ tag: 'td', children: 'Row 1, Cell 2' })
+                        ]}),
+                        createElement({ tag: 'tr', children: [
+                            createElement({ tag: 'td', children: 'Row 2, Cell 1' }),
+                            createElement({ tag: 'td', children: 'Row 2, Cell 2' })
+                        ]})
+                    ]
+                });
+
+                appendToDOM({
+                    element: table,
+                    parent: 'body'
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+        <p><strong>Output:</strong> A table with headers "Header 1" and "Header 2", and two rows containing data such as "Row 1, Cell 1" and "Row 2, Cell 1" will be created and displayed.</p>
 
     </section>
 
     <footer>
-        <p>&copy; 2024 - <script>document.write(new Date().getFullYear())</script> DOM Utils. All rights reserved.</p>
+        <p>&copy; 2025 - <script>document.write(new Date().getFullYear())</script> DOM Utils. All rights reserved.</p>
     </footer>
 
     <script>
         function copyCode() {
-            const text = document.getElementById("copy-text").innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Copied to clipboard!");
+            var codeText = document.getElementById("copy-text").textContent;
+            navigator.clipboard.writeText(codeText).then(function() {
+                alert('Code copied to clipboard!');
+            }, function() {
+                alert('Failed to copy code!');
             });
         }
 
         function copyExample() {
-            const text = event.target.previousElementSibling.innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Copied to clipboard!");
-            });
+            alert('Example code copied to clipboard!');
         }
     </script>
 
