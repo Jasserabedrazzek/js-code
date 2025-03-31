@@ -134,18 +134,15 @@
 
     <section id="usage">
         <h2>Usage</h2>
-        <p>Example: Creating a new element, styling it, and adding it to the page.</p>
+        <p>Examples: Creating a new element, styling it, and adding it to the page.</p>
+        
+        <h3>1. Simple Element Creation</h3>
+        <p>This example creates a <code>div</code> with text content.</p>
         <div class="code-block">
-            <code id="example-code">
-                <span class="blue">const</span> newDiv = createElement({
+            <code>
+                const newDiv = createElement({
                     tag: 'div',
-                    attributes: { id: 'myDiv', class: 'container' },
                     children: 'Hello, World!'
-                });
-
-                applyStyles({
-                    selector: '#myDiv',
-                    css: { backgroundColor: 'blue', color: 'white', padding: '10px' }
                 });
 
                 appendToDOM({
@@ -155,6 +152,94 @@
             </code>
             <button onclick="copyExample()">Copy</button>
         </div>
+
+        <h3>2. Adding Attributes</h3>
+        <p>This example adds attributes like <code>id</code> and <code>class</code> to the element.</p>
+        <div class="code-block">
+            <code>
+                const newDiv = createElement({
+                    tag: 'div',
+                    attributes: { id: 'myDiv', class: 'container' },
+                    children: 'This is a styled div!'
+                });
+
+                applyStyles({
+                    selector: '#myDiv',
+                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' }
+                });
+
+                appendToDOM({
+                    element: newDiv,
+                    parent: 'body'
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+
+        <h3>3. Nesting Elements</h3>
+        <p>This example creates a <code>div</code> containing a <code>span</code> element.</p>
+        <div class="code-block">
+            <code>
+                const newDiv = createElement({
+                    tag: 'div',
+                    attributes: { id: 'parent' },
+                    children: createElement({
+                        tag: 'span',
+                        children: 'This is a nested span element'
+                    })
+                });
+
+                applyStyles({
+                    selector: '#parent',
+                    css: { backgroundColor: 'lightgreen', padding: '20px' }
+                });
+
+                appendToDOM({
+                    element: newDiv,
+                    parent: 'body'
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+
+        <h3>4. Dynamic Attributes and Events</h3>
+        <p>This example shows how to dynamically add attributes and event listeners to elements.</p>
+        <div class="code-block">
+            <code>
+                const button = createElement({
+                    tag: 'button',
+                    attributes: { id: 'myButton' },
+                    children: 'Click Me'
+                });
+
+                button.addEventListener('click', () => {
+                    alert('Button clicked!');
+                });
+
+                appendToDOM({
+                    element: button,
+                    parent: 'body'
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+
+        <h3>5. Applying Styles</h3>
+        <p>Example of applying CSS styles to a specific selector.</p>
+        <div class="code-block">
+            <code>
+                applyStyles({
+                    selector: '#myDiv',
+                    css: {
+                        backgroundColor: 'yellow',
+                        fontSize: '20px',
+                        textAlign: 'center'
+                    }
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+
     </section>
 
     <footer>
@@ -170,7 +255,7 @@
         }
 
         function copyExample() {
-            const text = document.getElementById("example-code").innerText;
+            const text = event.target.previousElementSibling.innerText;
             navigator.clipboard.writeText(text).then(() => {
                 alert("Copied to clipboard!");
             });
