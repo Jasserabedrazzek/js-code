@@ -284,7 +284,7 @@
 
     <script>
         function copyCode() {
-            var codeText = document.getElementById("copy-text").textContent;
+            var codeText = document.getElementById("copy-text").textContent.trim();
             navigator.clipboard.writeText(codeText).then(function() {
                 alert('Code copied to clipboard!');
             }, function() {
