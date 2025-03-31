@@ -142,15 +142,15 @@
             <code>
                 const newDiv = createElement({
                     tag: 'div',
-                    children: 'Hello, World!' // The text content inside the div
+                    children: 'Hello, World!'
                 });
 
                 appendToDOM({
-                    element: newDiv, // The created div element
-                    parent: 'body' // Append it to the body of the page
+                    element: newDiv,
+                    parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> A simple `div` will appear with the text "Hello, World!" on the webpage.</p>
 
@@ -160,13 +160,13 @@
             <code>
                 const newDiv = createElement({
                     tag: 'div',
-                    attributes: { id: 'myDiv', class: 'container' }, // Adding id and class
-                    children: 'This is a styled div!' // The content inside the div
+                    attributes: { id: 'myDiv', class: 'container' },
+                    children: 'This is a styled div!'
                 });
 
                 applyStyles({
-                    selector: '#myDiv', // Target the div with id 'myDiv'
-                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' } // Applying styles
+                    selector: '#myDiv',
+                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' }
                 });
 
                 appendToDOM({
@@ -174,7 +174,7 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> A `div` with an ID of `myDiv` will be displayed with a light blue background, dark blue text, and padding. The text inside it will read "This is a styled div!"</p>
 
@@ -186,13 +186,13 @@
                     tag: 'div',
                     attributes: { id: 'parent' },
                     children: createElement({
-                        tag: 'span', // Nested span inside div
-                        children: 'This is a nested span element' // Text content inside span
+                        tag: 'span',
+                        children: 'This is a nested span element'
                     })
                 });
 
                 applyStyles({
-                    selector: '#parent', // Apply styles to the parent div
+                    selector: '#parent',
                     css: { backgroundColor: 'lightgreen', padding: '20px' }
                 });
 
@@ -201,7 +201,7 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> A `div` with the text "This is a nested span element" inside a nested `span` element will appear. The `div` will have a light green background and padding.</p>
 
@@ -212,11 +212,11 @@
                 const button = createElement({
                     tag: 'button',
                     attributes: { id: 'myButton' },
-                    children: 'Click Me' // Button text
+                    children: 'Click Me'
                 });
 
                 button.addEventListener('click', () => {
-                    alert('Button clicked!'); // Alert on button click
+                    alert('Button clicked!');
                 });
 
                 appendToDOM({
@@ -224,7 +224,7 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> A button labeled "Click Me" will appear. When clicked, it will show an alert that says "Button clicked!"</p>
 
@@ -233,15 +233,15 @@
         <div class="code-block">
             <code>
                 applyStyles({
-                    selector: '#myDiv', // Targeting div with id myDiv
+                    selector: '#myDiv',
                     css: {
                         backgroundColor: 'yellow',
                         fontSize: '20px',
-                        textAlign: 'center' // Apply styles like background color and text alignment
+                        textAlign: 'center'
                     }
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> The div with the ID `myDiv` will have a yellow background, font size set to 20px, and its text will be centered.</p>
 
@@ -272,7 +272,7 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="copyExample(event)">Copy</button>
         </div>
         <p><strong>Output:</strong> A table with headers "Header 1" and "Header 2", and two rows containing data such as "Row 1, Cell 1" and "Row 2, Cell 1" will be created and displayed.</p>
 
@@ -292,8 +292,14 @@
             });
         }
 
-        function copyExample() {
-            alert('Example code copied to clipboard!');
+        function copyExample(event) {
+            var codeBlock = event.target.closest('.code-block').querySelector('code');
+            var codeText = codeBlock.textContent.trim();
+            navigator.clipboard.writeText(codeText).then(function() {
+                alert('Example code copied to clipboard!');
+            }, function() {
+                alert('Failed to copy code!');
+            });
         }
     </script>
 
