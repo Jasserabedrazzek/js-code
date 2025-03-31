@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Utils - Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #222;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px;
+            background: #007BFF;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: white;
+            color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block {
+            background: #222;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre;
+            font-family: monospace;
+        }
+
+        .code-block button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .blue { color: lightblue; }
+        .green { color: lightgreen; }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #222;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>DOM Utils</h1>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#install">Installation</a></li>
+            <li><a href="#usage">Usage</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h2>DOM Utils - A Simple JavaScript Library</h2>
+        <p>Easily create elements, apply styles, and add them to the DOM.</p>
+        <a href="https://create-page-with-js.netlify.app/dom-utils.js" class="btn">Download Library</a>
+    </header>
+
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>DOM Utils is a lightweight JavaScript library that simplifies creating and managing DOM elements dynamically.</p>
+    </section>
+
+    <section id="install">
+        <h2>Installation</h2>
+        <p>To use this library, include the following script in your project:</p>
+        <div class="code-block">
+            <code id="copy-text">
+                <span class="blue">import</span> { createElement, applyStyles, appendToDOM } <span class="blue">from</span> '<span class="green">https://create-page-with-js.netlify.app/dom-utils.js</span>';
+            </code>
+            <button onclick="copyCode()">Copy</button>
+        </div>
+    </section>
+
+    <section id="usage">
+        <h2>Usage</h2>
+        <p>Example: Creating a new element, styling it, and adding it to the page.</p>
+        <div class="code-block">
+            <code id="example-code">
+                <span class="blue">const</span> newDiv = createElement({
+                    tag: 'div',
+                    attributes: { id: 'myDiv', class: 'container' },
+                    children: 'Hello, World!'
+                });
+
+                applyStyles({
+                    selector: '#myDiv',
+                    css: { backgroundColor: 'blue', color: 'white', padding: '10px' }
+                });
+
+                appendToDOM({
+                    element: newDiv,
+                    parent: 'body'
+                });
+            </code>
+            <button onclick="copyExample()">Copy</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 DOM Utils. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const text = document.getElementById("copy-text").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            });
+        }
+
+        function copyExample() {
+            const text = document.getElementById("example-code").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            });
+        }
+    </script>
+
+</body>
+</html>
