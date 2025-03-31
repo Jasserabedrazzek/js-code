@@ -87,8 +87,14 @@
             cursor: pointer;
         }
 
-        .blue { color: lightblue; }
-        .green { color: lightgreen; }
+        .output-block {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #333;
+        }
 
         footer {
             text-align: center;
@@ -150,9 +156,9 @@
                     parent: 'body' // Append it to the body of the page
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="executeExample1()">Run Example</button>
         </div>
-        <p><strong>Output:</strong> A simple `div` will appear with the text "Hello, World!" on the webpage.</p>
+        <div id="output1" class="output-block"></div>
 
         <h3>2. Adding Attributes</h3>
         <p>This example adds attributes like <code>id</code> and <code>class</code> to the element.</p>
@@ -174,9 +180,9 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="executeExample2()">Run Example</button>
         </div>
-        <p><strong>Output:</strong> A `div` with an ID of `myDiv` will be displayed with a light blue background, dark blue text, and padding. The text inside it will read "This is a styled div!"</p>
+        <div id="output2" class="output-block"></div>
 
         <h3>3. Nesting Elements</h3>
         <p>This example creates a <code>div</code> containing a <code>span</code> element.</p>
@@ -201,9 +207,9 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="executeExample3()">Run Example</button>
         </div>
-        <p><strong>Output:</strong> A `div` with the text "This is a nested span element" inside a nested `span` element will appear. The `div` will have a light green background and padding.</p>
+        <div id="output3" class="output-block"></div>
 
         <h3>4. Dynamic Attributes and Events</h3>
         <p>This example shows how to dynamically add attributes and event listeners to elements.</p>
@@ -224,9 +230,9 @@
                     parent: 'body'
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="executeExample4()">Run Example</button>
         </div>
-        <p><strong>Output:</strong> A button labeled "Click Me" will appear. When clicked, it will show an alert that says "Button clicked!"</p>
+        <div id="output4" class="output-block"></div>
 
         <h3>5. Applying Styles</h3>
         <p>Example of applying CSS styles to a specific selector.</p>
@@ -241,40 +247,9 @@
                     }
                 });
             </code>
-            <button onclick="copyExample()">Copy</button>
+            <button onclick="executeExample5()">Run Example</button>
         </div>
-        <p><strong>Output:</strong> The div with the ID `myDiv` will have a yellow background, font size set to 20px, and its text will be centered.</p>
-
-        <h3>6. Creating a Table</h3>
-        <p>This example demonstrates how to create a simple HTML table with rows and cells.</p>
-        <div class="code-block">
-            <code>
-                const table = createElement({
-                    tag: 'table',
-                    children: [
-                        createElement({ tag: 'tr', children: [
-                            createElement({ tag: 'th', children: 'Header 1' }),
-                            createElement({ tag: 'th', children: 'Header 2' })
-                        ]}),
-                        createElement({ tag: 'tr', children: [
-                            createElement({ tag: 'td', children: 'Row 1, Cell 1' }),
-                            createElement({ tag: 'td', children: 'Row 1, Cell 2' })
-                        ]}),
-                        createElement({ tag: 'tr', children: [
-                            createElement({ tag: 'td', children: 'Row 2, Cell 1' }),
-                            createElement({ tag: 'td', children: 'Row 2, Cell 2' })
-                        ]})
-                    ]
-                });
-
-                appendToDOM({
-                    element: table,
-                    parent: 'body'
-                });
-            </code>
-            <button onclick="copyExample()">Copy</button>
-        </div>
-        <p><strong>Output:</strong> A table with headers "Header 1" and "Header 2", and two rows containing data such as "Row 1, Cell 1" and "Row 2, Cell 1" will be created and displayed.</p>
+        <div id="output5" class="output-block"></div>
 
     </section>
 
@@ -283,6 +258,7 @@
     </footer>
 
     <script>
+        // Function to copy the installation code
         function copyCode() {
             var codeText = document.getElementById("copy-text").textContent;
             navigator.clipboard.writeText(codeText).then(function() {
@@ -292,8 +268,93 @@
             });
         }
 
-        function copyExample() {
-            alert('Example code copied to clipboard!');
+        // Functions to dynamically run examples and show output
+        function executeExample1() {
+            const newDiv = createElement({
+                tag: 'div',
+                children: 'Hello, World!'
+            });
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
+            document.getElementById('output1').innerHTML = '<strong>Output:</strong> A simple div with the text "Hello, World!" will appear on the webpage.';
+        }
+
+        function executeExample2() {
+            const newDiv = createElement({
+                tag: 'div',
+                attributes: { id: 'myDiv', class: 'container' },
+                children: 'This is a styled div!'
+            });
+
+            applyStyles({
+                selector: '#myDiv',
+                css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' }
+            });
+
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
+            document.getElementById('output2').innerHTML = '<strong>Output:</strong> A div with ID "myDiv" and light blue background will appear with the text "This is a styled div!"';
+        }
+
+        function executeExample3() {
+            const newDiv = createElement({
+                tag: 'div',
+                attributes: { id: 'parent' },
+                children: createElement({
+                    tag: 'span',
+                    children: 'This is a nested span element'
+                })
+            });
+
+            applyStyles({
+                selector: '#parent',
+                css: { backgroundColor: 'lightgreen', padding: '20px' }
+            });
+
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
+            document.getElementById('output3').innerHTML = '<strong>Output:</strong> A div with the ID "parent" containing a nested span will appear with light green background.';
+        }
+
+        function executeExample4() {
+            const button = createElement({
+                tag: 'button',
+                attributes: { id: 'myButton' },
+                children: 'Click Me'
+            });
+
+            button.addEventListener('click', () => {
+                alert('Button clicked!');
+            });
+
+            appendToDOM({
+                element: button,
+                parent: 'body'
+            });
+
+            document.getElementById('output4').innerHTML = '<strong>Output:</strong> A button with the text "Click Me" will appear. Clicking the button will show an alert.';
+        }
+
+        function executeExample5() {
+            applyStyles({
+                selector: '#myDiv',
+                css: {
+                    backgroundColor: 'yellow',
+                    fontSize: '20px',
+                    textAlign: 'center'
+                }
+            });
+
+            document.getElementById('output5').innerHTML = '<strong>Output:</strong> The div with ID "myDiv" will have a yellow background, larger font size, and centered text.';
         }
     </script>
 
