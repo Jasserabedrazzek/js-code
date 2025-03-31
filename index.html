@@ -5,149 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM Utils - Documentation</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
-            padding: 20px;
         }
 
         nav {
-            background-color: #333;
-            color: #fff;
+            background: #222;
+            color: white;
             padding: 10px;
-        }
-
-        nav h1 {
-            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: flex-start;
         }
 
         nav ul li {
-            margin-right: 20px;
+            margin: 0 15px;
         }
 
         nav ul li a {
-            color: #fff;
+            color: white;
             text-decoration: none;
-            font-size: 16px;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
-        }
-
-        header h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 20px;
+            padding: 50px;
+            background: #007BFF;
+            color: white;
         }
 
         .btn {
-            background-color: #007bff;
-            color: #fff;
+            display: inline-block;
             padding: 10px 20px;
+            margin-top: 20px;
+            background: white;
+            color: #007BFF;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
         }
 
         section {
-            margin-bottom: 40px;
-        }
-
-        section h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        section p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         .code-block {
-            background-color: #282c34;
-            color: #f8f8f2;
-            padding: 20px;
+            background: #222;
+            color: white;
+            padding: 10px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            position: relative;
             overflow-x: auto;
-            font-family: 'Courier New', Courier, monospace;
         }
 
         .code-block code {
             display: block;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 14px;
+            white-space: pre;
+            font-family: monospace;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #28a745;
+        .code-block button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #007BFF;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 5px 10px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #218838;
-        }
-
         .output-block {
-            background-color: #e9ecef;
+            margin-top: 20px;
             padding: 10px;
-            border: 1px solid #ddd;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
             color: #333;
-            margin-top: 10px;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-            margin-top: 40px;
-        }
-
-        footer p {
-            font-size: 16px;
-        }
-
-        footer script {
-            color: #fff;
+            padding: 10px;
+            background: #222;
+            color: white;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -178,7 +132,7 @@
         <p>To use this library, include the following script in your project:</p>
         <div class="code-block">
             <code id="copy-text">
-                import { createElement, applyStyles, appendToDOM } from 'https://create-page-with-js.netlify.app/dom-utils.js';
+                <span class="blue">import</span> { createElement, applyStyles, appendToDOM } <span class="blue">from</span> '<span class="green">https://create-page-with-js.netlify.app/dom-utils.js</span>';
             </code>
             <button onclick="copyCode()">Copy</button>
         </div>
@@ -187,13 +141,20 @@
     <section id="usage">
         <h2>Usage</h2>
         <p>Examples: Creating a new element, styling it, and adding it to the page.</p>
-
+        
         <h3>1. Simple Element Creation</h3>
         <p>This example creates a <code>div</code> with text content.</p>
         <div class="code-block">
             <code>
-                const newDiv = createElement({ tag: 'div', children: 'Hello, World!' });
-                appendToDOM({ element: newDiv, parent: 'body' });
+                const newDiv = createElement({
+                    tag: 'div',
+                    children: 'Hello, World!' // The text content inside the div
+                });
+
+                appendToDOM({
+                    element: newDiv, // The created div element
+                    parent: 'body' // Append it to the body of the page
+                });
             </code>
             <button onclick="executeExample1()">Run Example</button>
         </div>
@@ -203,50 +164,88 @@
         <p>This example adds attributes like <code>id</code> and <code>class</code> to the element.</p>
         <div class="code-block">
             <code>
-                const newDiv = createElement({ tag: 'div', attributes: { id: 'myDiv', class: 'container' }, children: 'This is a styled div!' });
-                applyStyles({ selector: '#myDiv', css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' } });
-                appendToDOM({ element: newDiv, parent: 'body' });
+                const newDiv = createElement({
+                    tag: 'div',
+                    attributes: { id: 'myDiv', class: 'container' }, // Adding id and class
+                    children: 'This is a styled div!' // The content inside the div
+                });
+
+                applyStyles({
+                    selector: '#myDiv', // Target the div with id 'myDiv'
+                    css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' } // Applying styles
+                });
+
+                appendToDOM({
+                    element: newDiv,
+                    parent: 'body'
+                });
             </code>
             <button onclick="executeExample2()">Run Example</button>
         </div>
         <div id="output2" class="output-block"></div>
 
-        <h3>3. Creating a Button with a Click Event</h3>
-        <p>This example creates a <code>button</code> and attaches a click event to it.</p>
+        <h3>3. Nesting Elements</h3>
+        <p>This example creates a <code>div</code> containing a <code>span</code> element.</p>
         <div class="code-block">
             <code>
-                const button = createElement({ tag: 'button', children: 'Click Me!' });
-                button.onclick = function() { alert('Button clicked!'); };
-                appendToDOM({ element: button, parent: 'body' });
+                const newDiv = createElement({
+                    tag: 'div',
+                    attributes: { id: 'parent' },
+                    children: createElement({
+                        tag: 'span', // Nested span inside div
+                        children: 'This is a nested span element' // Text content inside span
+                    })
+                });
+
+                applyStyles({
+                    selector: '#parent', // Apply styles to the parent div
+                    css: { backgroundColor: 'lightgreen', padding: '20px' }
+                });
+
+                appendToDOM({
+                    element: newDiv,
+                    parent: 'body'
+                });
             </code>
             <button onclick="executeExample3()">Run Example</button>
         </div>
         <div id="output3" class="output-block"></div>
 
-        <h3>4. Nested Elements</h3>
-        <p>This example creates a <code>div</code> containing a <code>p</code> element.</p>
+        <h3>4. Dynamic Attributes and Events</h3>
+        <p>This example shows how to dynamically add attributes and event listeners to elements.</p>
         <div class="code-block">
             <code>
-                const newDiv = createElement({ tag: 'div' });
-                const newP = createElement({ tag: 'p', children: 'This is a nested paragraph inside a div!' });
-                newDiv.appendChild(newP);
-                appendToDOM({ element: newDiv, parent: 'body' });
+                const button = createElement({
+                    tag: 'button',
+                    attributes: { id: 'myButton' },
+                    children: 'Click Me' // Button text
+                });
+
+                button.addEventListener('click', () => {
+                    alert('Button clicked!'); // Alert on button click
+                });
+
+                appendToDOM({
+                    element: button,
+                    parent: 'body'
+                });
             </code>
             <button onclick="executeExample4()">Run Example</button>
         </div>
         <div id="output4" class="output-block"></div>
 
-        <h3>5. Dynamic List Creation</h3>
-        <p>This example dynamically creates a list of items.</p>
+        <h3>5. Applying Styles</h3>
+        <p>Example of applying CSS styles to a specific selector.</p>
         <div class="code-block">
             <code>
-                const items = ['Item 1', 'Item 2', 'Item 3'];
-                const list = createElement({ tag: 'ul' });
-                items.forEach(item => {
-                    const listItem = createElement({ tag: 'li', children: item });
-                    list.appendChild(listItem);
+                applyStyles({
+                    selector: '#myDiv', // Targeting div with id myDiv
+                    css: {
+                        backgroundColor: 'yellow',
+                        fontSize: '20px',
+                        textAlign: 'center' // Apply styles like background color and text alignment
+                    }
                 });
-                appendToDOM({ element: list, parent: 'body' });
             </code>
             <button onclick="executeExample5()">Run Example</button>
         </div>
@@ -258,9 +257,8 @@
         <p>&copy; 2025 - <script>document.write(new Date().getFullYear())</script> DOM Utils. All rights reserved.</p>
     </footer>
 
-    <script src="https://create-page-with-js.netlify.app/dom-utils.js"></script>
-
     <script>
+        // Function to copy the installation code
         function copyCode() {
             var codeText = document.getElementById("copy-text").textContent;
             navigator.clipboard.writeText(codeText).then(function() {
@@ -270,43 +268,93 @@
             });
         }
 
+        // Functions to dynamically run examples and show output
         function executeExample1() {
-            const newDiv = createElement({ tag: 'div', children: 'Hello, World!' });
-            appendToDOM({ element: newDiv, parent: 'body' });
+            const newDiv = createElement({
+                tag: 'div',
+                children: 'Hello, World!'
+            });
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
             document.getElementById('output1').innerHTML = '<strong>Output:</strong> A simple div with the text "Hello, World!" will appear on the webpage.';
         }
 
         function executeExample2() {
-            const newDiv = createElement({ tag: 'div', attributes: { id: 'myDiv', class: 'container' }, children: 'This is a styled div!' });
-            applyStyles({ selector: '#myDiv', css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' } });
-            appendToDOM({ element: newDiv, parent: 'body' });
+            const newDiv = createElement({
+                tag: 'div',
+                attributes: { id: 'myDiv', class: 'container' },
+                children: 'This is a styled div!'
+            });
+
+            applyStyles({
+                selector: '#myDiv',
+                css: { backgroundColor: 'lightblue', padding: '20px', color: 'darkblue' }
+            });
+
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
             document.getElementById('output2').innerHTML = '<strong>Output:</strong> A div with ID "myDiv" and light blue background will appear with the text "This is a styled div!"';
         }
 
         function executeExample3() {
-            const button = createElement({ tag: 'button', children: 'Click Me!' });
-            button.onclick = function() { alert('Button clicked!'); };
-            appendToDOM({ element: button, parent: 'body' });
-            document.getElementById('output3').innerHTML = '<strong>Output:</strong> A button will appear on the page. When clicked, it will display an alert saying "Button clicked!"';
+            const newDiv = createElement({
+                tag: 'div',
+                attributes: { id: 'parent' },
+                children: createElement({
+                    tag: 'span',
+                    children: 'This is a nested span element'
+                })
+            });
+
+            applyStyles({
+                selector: '#parent',
+                css: { backgroundColor: 'lightgreen', padding: '20px' }
+            });
+
+            appendToDOM({
+                element: newDiv,
+                parent: 'body'
+            });
+
+            document.getElementById('output3').innerHTML = '<strong>Output:</strong> A div with the ID "parent" containing a nested span will appear with light green background.';
         }
 
         function executeExample4() {
-            const newDiv = createElement({ tag: 'div' });
-            const newP = createElement({ tag: 'p', children: 'This is a nested paragraph inside a div!' });
-            newDiv.appendChild(newP);
-            appendToDOM({ element: newDiv, parent: 'body' });
-            document.getElementById('output4').innerHTML = '<strong>Output:</strong> A div with a nested paragraph inside will appear on the webpage.';
+            const button = createElement({
+                tag: 'button',
+                attributes: { id: 'myButton' },
+                children: 'Click Me'
+            });
+
+            button.addEventListener('click', () => {
+                alert('Button clicked!');
+            });
+
+            appendToDOM({
+                element: button,
+                parent: 'body'
+            });
+
+            document.getElementById('output4').innerHTML = '<strong>Output:</strong> A button with the text "Click Me" will appear. Clicking the button will show an alert.';
         }
 
         function executeExample5() {
-            const items = ['Item 1', 'Item 2', 'Item 3'];
-            const list = createElement({ tag: 'ul' });
-            items.forEach(item => {
-                const listItem = createElement({ tag: 'li', children: item });
-                list.appendChild(listItem);
+            applyStyles({
+                selector: '#myDiv',
+                css: {
+                    backgroundColor: 'yellow',
+                    fontSize: '20px',
+                    textAlign: 'center'
+                }
             });
-            appendToDOM({ element: list, parent: 'body' });
-            document.getElementById('output5').innerHTML = '<strong>Output:</strong> A dynamic list with three items will appear on the webpage.';
+
+            document.getElementById('output5').innerHTML = '<strong>Output:</strong> The div with ID "myDiv" will have a yellow background, larger font size, and centered text.';
         }
     </script>
 
